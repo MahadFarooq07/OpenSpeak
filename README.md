@@ -1,11 +1,7 @@
 # Cadence
 
 <p align="center">
-  <img src="assets/logo.svg" width="88" height="88" alt="Cadence logo" />
-</p>
-
-<p align="center">
-  <strong>Hold a key. Say what you mean. Let go.</strong><br />
+  <strong>Hold a key and transcribe speech anywhere</strong><br />
   Cadence turns it into clean text and puts it wherever your cursor already is.
 </p>
 
