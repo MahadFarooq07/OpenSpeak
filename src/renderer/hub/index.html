@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:"
+    />
+    <link rel="stylesheet" href="hub.css" />
+    <title>Cadence</title>
+  </head>
+  <body>
+    <header class="titlebar">
+      <div class="brand">
+        <svg class="mark" viewBox="0 0 88 88" aria-hidden="true" focusable="false">
+          <g stroke="currentColor" stroke-width="7" stroke-linecap="round">
+            <line x1="57" y1="22" x2="57" y2="30" />
+            <line x1="43" y1="21" x2="43" y2="35" />
+            <line x1="31" y1="27" x2="31" y2="45" />
+            <line x1="24" y1="33" x2="24" y2="55" />
+            <line x1="31" y1="43" x2="31" y2="61" />
+            <line x1="43" y1="53" x2="43" y2="67" />
+            <line x1="57" y1="58" x2="57" y2="66" />
+          </g>
+        </svg>
+        <span class="name">Cadence</span>
+      </div>
+      <div class="titlebar-status" id="titleStatus"></div>
+    </header>
+
+    <div class="shell">
+      <nav class="sidebar">
+        <button class="nav" data-view="home" aria-current="true">
+          <span class="ico">◉</span> Dictate
+        </button>
+        <button class="nav" data-view="history"><span class="ico">≡</span> History</button>
+        <button class="nav" data-view="dictionary"><span class="ico">Aa</span> Dictionary</button>
+        <button class="nav" data-view="stats"><span class="ico">▤</span> Stats</button>
+        <button class="nav" data-view="settings"><span class="ico">⚙</span> Settings</button>
+        <div class="nav-spacer"></div>
+        <div class="version" id="version"></div>
+      </nav>
+
+      <main class="content">
+        <!-- ---------------------------------------------------------- HOME -->
+        <section class="view" data-view="home">
+          <div class="hero">
+            <div class="hero-key">
+              <div class="kbd" id="heroHotkey">Ctrl + Shift + Space</div>
+              <p class="hero-sub" id="heroSub">Hold it, speak, let go.</p>
+            </div>
+            <button class="btn primary big" id="btnDictate">Try a dictation</button>
+          </div>
+
+          <div id="problems" class="problems"></div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <h2>Formatting mode</h2>
+              <p>How Cadence shapes what you say before it lands.</p>
+            </div>
+            <div class="modes" id="modeGrid"></div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <h2>Recent</h2>
+              <button class="link" data-goto="history">See all</button>
+            </div>
+            <div id="recent" class="recent"></div>
+          </div>
+        </section>
+
+        <!-- ------------------------------------------------------- HISTORY -->
+        <section class="view" data-view="history" hidden>
+          <div class="view-head">
+            <h1>History</h1>
+            <div class="row">
+              <input id="historySearch" class="input" type="search" placeholder="Search dictations…" />
+              <button class="btn ghost danger" id="btnClearHistory">Clear all</button>
+            </div>
+          </div>
+          <div id="historyList" class="history"></div>
+        </section>
+
+        <!-- ---------------------------------------------------- DICTIONARY -->
+        <section class="view" data-view="dictionary" hidden>
+          <div class="view-head">
+            <h1>Dictionary</h1>
+          </div>
+          <p class="lead">
+            Names, jargon and acronyms Cadence should get right. Leave “heard as” empty to simply
+            teach it a spelling; fill it in to force a replacement.
+          </p>
+          <form class="dict-form" id="dictForm">
+            <input class="input" id="dictHeard" type="text" placeholder="Heard as (optional)" />
+            <span class="arrow">→</span>
+            <input class="input" id="dictWrite" type="text" placeholder="Write as" required />
+            <button class="btn primary" type="submit">Add</button>
+          </form>
+          <div id="dictError" class="field-error"></div>
+          <div id="dictList" class="dict-list"></div>
+        </section>
+
+        <!-- --------------------------------------------------------- STATS -->
+        <section class="view" data-view="stats" hidden>
+          <div class="view-head">
+            <h1>Stats</h1>
+            <button class="btn ghost danger" id="btnResetStats">Reset</button>
+          </div>
+          <div class="stat-grid" id="statGrid"></div>
+          <div class="panel">
+            <div class="panel-head">
+              <h2>Last 30 days</h2>
+              <p id="activityCaption"></p>
+            </div>
+            <div class="activity" id="activity"></div>
+          </div>
+        </section>
+
+        <!-- ------------------------------------------------------ SETTINGS -->
+        <section class="view" data-view="settings" hidden>
+          <div class="view-head"><h1>Settings</h1></div>
+
+          <div class="panel" id="panel-keys">
+            <div class="panel-head">
+              <h2>API keys</h2>
+              <p>Stored encrypted with Windows DPAPI. Never written to disk in plain text.</p>
+            </div>
+            <div id="keyRows" class="key-rows"></div>
+            <p class="note" id="encryptionNote"></p>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <h2>Transcription</h2>
+              <p>Turns your audio into text. Claude has no speech API, so pick OpenAI or Gemini.</p>
+            </div>
+            <div class="field">
+              <label for="setTransProvider">Provider</label>
+              <select class="input" id="setTransProvider" data-setting="transcriptionProvider">
+                <option value="openai">OpenAI</option>
+                <option value="gemini">Google Gemini</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="setTransModel">Model</label>
+              <input
+                class="input"
+                id="setTransModel"
+                list="transModels"
+                data-setting="transcriptionModel"
+              />
+              <datalist id="transModels"></datalist>
+            </div>
+            <div class="field">
+              <label for="setLanguage">Language</label>
+              <select class="input" id="setLanguage" data-setting="language">
+                <option value="auto">Detect automatically</option>
+                <option value="en">English</option>
+                <option value="es">Spanish</option>
+                <option value="fr">French</option>
+                <option value="de">German</option>
+                <option value="pt">Portuguese</option>
+                <option value="it">Italian</option>
+                <option value="nl">Dutch</option>
+                <option value="hi">Hindi</option>
+                <option value="ur">Urdu</option>
+                <option value="ar">Arabic</option>
+                <option value="zh">Chinese</option>
+                <option value="ja">Japanese</option>
+                <option value="ko">Korean</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <h2>Cleanup</h2>
+              <p>Removes filler, resolves self-corrections and formats the result.</p>
+            </div>
+            <label class="toggle">
+              <input type="checkbox" id="setCleanupEnabled" data-setting="cleanupEnabled" />
+              <span>Clean up transcripts with an LLM</span>
+            </label>
+            <div class="field">
+              <label for="setCleanProvider">Provider</label>
+              <select class="input" id="setCleanProvider" data-setting="cleanupProvider">
+                <option value="openai">OpenAI</option>
+                <option value="anthropic">Anthropic (Claude)</option>
+                <option value="gemini">Google Gemini</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="setCleanModel">Model</label>
+              <input class="input" id="setCleanModel" list="cleanModels" data-setting="cleanupModel" />
+              <datalist id="cleanModels"></datalist>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <h2>Hotkey</h2>
+              <p id="hotkeyTier"></p>
+            </div>
+            <div class="field">
+              <label for="setHotkeyMode">Trigger style</label>
+              <select class="input" id="setHotkeyMode" data-setting="hotkeyMode">
+                <option value="hold">Hold to talk</option>
+                <option value="toggle">Press to start, press to stop</option>
+              </select>
+            </div>
+            <label class="toggle" id="rawToggleRow">
+              <input type="checkbox" id="setUseRawHotkey" data-setting="useRawHotkey" />
+              <span>Use a single bare key (needs the low-level keyboard hook)</span>
+            </label>
+            <div class="field" id="rawKeyField">
+              <label for="setRawKey">Push-to-talk key</label>
+              <select class="input" id="setRawKey" data-setting="hotkeyRawKey"></select>
+            </div>
+            <div class="field">
+              <label for="setAccelerator">Shortcut</label>
+              <div class="row">
+                <input class="input mono" id="setAccelerator" data-setting="hotkeyAccelerator" />
+                <button class="btn ghost" id="btnCapture" type="button">Record keys</button>
+              </div>
+            </div>
+            <label class="toggle">
+              <input type="checkbox" id="setCancelKey" data-setting="cancelKeyEnabled" />
+              <span>Escape cancels a dictation in progress</span>
+            </label>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <h2>Insertion</h2>
+              <p>How the finished text gets into the app you're using.</p>
+            </div>
+            <div class="field">
+              <label for="setPasteMethod">Method</label>
+              <select class="input" id="setPasteMethod" data-setting="pasteMethod">
+                <option value="paste">Clipboard + Ctrl+V (fast, recommended)</option>
+                <option value="type">Simulate typing (for apps that block paste)</option>
+                <option value="clipboard">Copy only — I'll paste it myself</option>
+              </select>
+            </div>
+            <label class="toggle">
+              <input type="checkbox" id="setRestoreClip" data-setting="restoreClipboard" />
+              <span>Put my previous clipboard contents back afterwards</span>
+            </label>
+            <label class="toggle">
+              <input type="checkbox" id="setAutoCap" data-setting="autoCapitalize" />
+              <span>Capitalise the first letter</span>
+            </label>
+            <label class="toggle">
+              <input type="checkbox" id="setAutoPunct" data-setting="autoPunctuate" />
+              <span>Finish the last sentence with a full stop</span>
+            </label>
+            <label class="toggle">
+              <input type="checkbox" id="setTrailing" data-setting="trailingSpace" />
+              <span>Add a trailing space so I can keep going</span>
+            </label>
+          </div>
+
+          <div class="panel" id="panel-audio">
+            <div class="panel-head">
+              <h2>Microphone</h2>
+              <p id="micStatus"></p>
+            </div>
+            <div class="field">
+              <label for="setDevice">Input device</label>
+              <div class="row">
+                <select class="input" id="setDevice"></select>
+                <button class="btn ghost" id="btnRefreshMics" type="button">Refresh</button>
+              </div>
+            </div>
+            <div class="field">
+              <label>Input level</label>
+              <div class="meter" id="meter">
+                <div class="meter-fill" id="meterFill"></div>
+                <div class="meter-floor" id="meterFloor"></div>
+              </div>
+              <div class="meter-caption" id="meterCaption">Say something — the bar should move.</div>
+            </div>
+            <div class="active-mic" id="activeMic"></div>
+            <div class="field">
+              <label for="setMinDuration">Ignore taps shorter than</label>
+              <div class="row">
+                <input
+                  class="input short"
+                  id="setMinDuration"
+                  type="number"
+                  min="0"
+                  max="3000"
+                  step="50"
+                  data-setting="minDurationMs"
+                  data-number="1"
+                />
+                <span class="suffix">ms</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head"><h2>Appearance & system</h2></div>
+            <div class="field">
+              <label for="setOverlayPos">Pill position</label>
+              <select class="input" id="setOverlayPos" data-setting="overlayPosition">
+                <option value="bottom-center">Bottom centre</option>
+                <option value="bottom-right">Bottom right</option>
+                <option value="top-center">Top centre</option>
+                <option value="top-right">Top right</option>
+              </select>
+            </div>
+            <label class="toggle">
+              <input type="checkbox" id="setOverlayIdle" data-setting="overlayVisibleWhenIdle" />
+              <span>Leave a dim dot on screen when idle (off = the pill vanishes)</span>
+            </label>
+            <label class="toggle">
+              <input type="checkbox" id="setSounds" data-setting="soundsEnabled" />
+              <span>Play start and finish sounds</span>
+            </label>
+            <label class="toggle">
+              <input type="checkbox" id="setLaunch" data-setting="launchAtLogin" />
+              <span>Launch Cadence when I sign in to Windows</span>
+            </label>
+            <label class="toggle">
+              <input type="checkbox" id="setStartMin" data-setting="startMinimized" />
+              <span>Start in the tray, without opening this window</span>
+            </label>
+            <div class="row gap">
+              <button class="btn ghost" id="btnDataDir" type="button">Open data folder</button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- --------------------------------------------------------- ONBOARDING -->
+    <div class="modal" id="onboarding" hidden>
+      <div class="sheet">
+        <div class="steps" id="obSteps"></div>
+
+        <div class="ob-body" data-step="0">
+          <h2>Welcome to Cadence</h2>
+          <p>
+            Hold a key anywhere in Windows, say what you mean, and let go. Cadence transcribes it,
+            cleans up the ums and false starts, and drops the finished text right where your cursor is.
+          </p>
+          <p class="muted">Three short steps and you're dictating.</p>
+        </div>
+
+        <div class="ob-body" data-step="1" hidden>
+          <h2>Connect a model</h2>
+          <p>
+            Cadence uses your own API key. Nothing is stored on our side, and the key is encrypted
+            with Windows DPAPI before it touches disk.
+          </p>
+          <div class="field">
+            <label for="obProvider">Provider</label>
+            <select class="input" id="obProvider">
+              <option value="openai">OpenAI — transcription and cleanup</option>
+              <option value="gemini">Google Gemini — transcription and cleanup</option>
+              <option value="anthropic">Anthropic (Claude) — cleanup only</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="obKey">API key</label>
+            <div class="row">
+              <input class="input mono" id="obKey" type="password" placeholder="Paste your key" />
+              <button class="btn" id="obTest" type="button">Save & test</button>
+            </div>
+          </div>
+          <div id="obKeyResult" class="field-error"></div>
+          <p class="note" id="obKeyNote"></p>
+        </div>
+
+        <div class="ob-body" data-step="2" hidden>
+          <h2>Check your microphone</h2>
+          <p>Cadence needs one working input device. Pick the one you actually speak into.</p>
+          <div class="field">
+            <label for="obDevice">Microphone</label>
+            <select class="input" id="obDevice"></select>
+          </div>
+          <div class="field">
+            <label>Input level</label>
+            <div class="meter">
+              <div class="meter-fill" id="obMeterFill"></div>
+            </div>
+            <div class="meter-caption" id="obMeterCaption">Say something — the bar should move.</div>
+          </div>
+          <div id="obMicResult" class="field-error"></div>
+        </div>
+
+        <div class="ob-body" data-step="3" hidden>
+          <h2>Your hotkey</h2>
+          <p>Hold this, speak, and release. You can change it later in Settings.</p>
+          <div class="kbd big" id="obHotkey">Ctrl + Shift + Space</div>
+          <p class="note" id="obHotkeyNote"></p>
+        </div>
+
+        <div class="ob-foot">
+          <button class="btn ghost" id="obBack" type="button">Back</button>
+          <div class="grow"></div>
+          <button class="btn ghost" id="obSkip" type="button">Skip setup</button>
+          <button class="btn primary" id="obNext" type="button">Continue</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="toasts" id="toasts"></div>
+
+    <script src="hub.js"></script>
+  </body>
+</html>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 88 88" width="88" height="88" role="img" aria-labelledby="title desc">
+  <title id="title">Cadence</title>
+  <desc id="desc">A letter C traced by level-meter bars — a monogram and a waveform at once.</desc>
+  <defs>
+    <linearGradient id="cadenceMark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4f9ef1"/>
+      <stop offset="1" stop-color="#2174db"/>
+    </linearGradient>
+  </defs>
+  <rect width="88" height="88" rx="19" fill="#131821"/>
+  <g stroke="url(#cadenceMark)" stroke-width="6.5" stroke-linecap="round">
+    <line x1="57" y1="22" x2="57" y2="30"/>
+    <line x1="43" y1="21" x2="43" y2="35"/>
+    <line x1="31" y1="27" x2="31" y2="45"/>
+    <line x1="24" y1="33" x2="24" y2="55"/>
+    <line x1="31" y1="43" x2="31" y2="61"/>
+    <line x1="43" y1="53" x2="43" y2="67"/>
+    <line x1="57" y1="58" x2="57" y2="66"/>
+  </g>
+</svg>

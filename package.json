@@ -1,0 +1,42 @@
+{
+  "name": "cadence",
+  "productName": "Cadence",
+  "version": "0.1.0",
+  "description": "Push-to-talk voice dictation for Windows. Hold a key, speak, and polished text lands at your cursor.",
+  "main": "src/main/main.js",
+  "author": "Cadence",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "test:format": "node tools/format-check.js",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder --win nsis"
+  },
+  "optionalDependencies": {
+    "uiohook-napi": "^1.5.4"
+  },
+  "devDependencies": {
+    "electron": "^32.2.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "app.cadence.dictation",
+    "productName": "Cadence",
+    "files": [
+      "src/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "perMachine": false
+    }
+  }
+}

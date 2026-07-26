@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'"
+    />
+    <link rel="stylesheet" href="overlay.css" />
+    <title>Cadence</title>
+  </head>
+  <body>
+    <div class="stage">
+      <div id="pill" class="pill state-idle">
+        <span class="dot" id="dot"></span>
+        <canvas id="wave" class="wave" width="200" height="40"></canvas>
+        <span class="label" id="label"></span>
+        <span class="time" id="time"></span>
+      </div>
+    </div>
+    <script src="overlay.js"></script>
+  </body>
+</html>
