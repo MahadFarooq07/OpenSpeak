@@ -12,7 +12,7 @@ const { clipboard } = require('electron');
  */
 
 const IS_WIN = process.platform === 'win32';
-const READY_TOKEN = 'CADENCE_READY';
+const READY_TOKEN = 'OPENSPEAK_READY';
 const INIT = [
   '$ErrorActionPreference = "SilentlyContinue"',
   'Add-Type -AssemblyName System.Windows.Forms',

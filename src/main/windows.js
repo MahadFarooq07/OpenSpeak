@@ -27,14 +27,14 @@ const BRAND = {
 };
 
 /**
- * The mark: a letter C traced by level-meter bars — a monogram and a waveform
- * at once. Drawn procedurally into a raw BGRA buffer so the app needs no
+ * The mark: a letter O traced by level-meter bars — the OpenSpeak monogram and
+ * a waveform at once. Drawn procedurally into a raw BGRA buffer so the app needs no
  * bitmap icon asset and every size is rendered rather than scaled.
  *
  * @param {number} size
  * @param {{plate?:boolean, simple?:boolean}} opts
  *   `plate` draws the rounded tile (window and installer icon).
- *   `simple` uses five heavier bars instead of seven, which survives being
+ *   `simple` uses eight heavier bars, which survive being
  *   squeezed into a 16px tray slot.
  */
 function appIcon(size = 256, { plate = true, simple = false } = {}) {
@@ -74,19 +74,17 @@ function appIcon(size = 256, { plate = true, simple = false } = {}) {
     }
   }
 
-  // Bar centres sit on an arc that opens to the right, forming the C. Heights
-  // swell toward the belly so it also reads as a level meter.
-  const angles = simple
-    ? [-60, -120, -180, -240, -300]
-    : [-60, -100, -140, -180, -220, -260, -300];
+  // Bar centres complete a ring, forming the O. Their varying lengths keep
+  // the mark tied to the level-meter language used throughout the product.
+  const angles = [0, 45, 90, 135, 180, 225, 270, 315];
   const heights = simple
-    ? [0.052, 0.098, 0.118, 0.098, 0.052]
-    : [0.048, 0.072, 0.096, 0.108, 0.096, 0.072, 0.048];
+    ? [0.045, 0.042, 0.04, 0.042, 0.045, 0.042, 0.04, 0.042]
+    : [0.05, 0.042, 0.04, 0.042, 0.05, 0.042, 0.04, 0.042];
 
-  const cx = size * 0.52;
+  const cx = size * 0.5;
   const cy = size * 0.5;
-  const radius = size * (simple ? 0.25 : 0.265);
-  const halfW = size * (simple ? 0.05 : 0.037);
+  const radius = size * (simple ? 0.24 : 0.245);
+  const halfW = size * (simple ? 0.044 : 0.037);
 
   angles.forEach((deg, i) => {
     const t = (deg * Math.PI) / 180;
@@ -262,7 +260,7 @@ function createHub({ show = true, view = '', anchor = '' } = {}) {
     minWidth: 880,
     minHeight: 600,
     show: false,
-    title: 'Cadence',
+    title: 'OpenSpeak',
     backgroundColor: '#0d0f14',
     icon: appIcon(256),
     autoHideMenuBar: true,
@@ -287,7 +285,7 @@ function createHub({ show = true, view = '', anchor = '' } = {}) {
   hub.webContents.once('did-finish-load', () => {
     if (view) send(hub, CH.HUB_GOTO, { view, anchor });
   });
-  // Cadence lives in the tray: closing the hub hides it instead of quitting.
+  // OpenSpeak lives in the tray: closing the hub hides it instead of quitting.
   hub.on('close', (e) => {
     if (quittingForReal) return;
     e.preventDefault();

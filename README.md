@@ -1,8 +1,12 @@
-# Cadence
+# OpenSpeak
+
+<p align="center">
+  <img src="assets/logo.svg" width="88" height="88" alt="OpenSpeak logo" />
+</p>
 
 <p align="center">
   <strong>Hold a key and transcribe speech anywhere</strong><br />
-  Cadence turns it into clean text and puts it wherever your cursor already is.
+  OpenSpeak turns it into clean text and puts it wherever your cursor already is.
 </p>
 
 <p align="center">
@@ -11,14 +15,14 @@
 
 ![A microphone waveform resolving into clean lines of text](assets/readme/hero-voice-to-text.png)
 
-Cadence is push-to-talk voice dictation for Windows. It is not another chat window and it is not
+OpenSpeak is push-to-talk voice dictation for Windows. It is not another chat window and it is not
 a meeting recorder. You hold a key in any app, speak, release, and the finished text lands at your
 cursor. The rough transcript can be cleaned up, corrected, formatted and shaped for the thing you
 are writing before it is pasted.
 
 > As building software gets accessible to everyone, more of it will be open-sourced; what people pay for shifts to trust, hosting, support, distribution, and not having to babysit it.
 
-![Cadence Dictate screen with formatting modes and recent dictations](assets/readme/01-dictate-home.png)
+![OpenSpeak Dictate screen with formatting modes and recent dictations](assets/readme/01-dictate-home.png)
 
 <sub>The screenshots use representative local demo data so no real API key, microphone name or
 dictation is exposed. The renderer and controls are the real app.</sub>
@@ -36,7 +40,7 @@ Normal dictation gives you a transcript. That is useful, but it still leaves you
 - changing a rambling thought into an email, message, note or prompt;
 - copying the result into the app where you were already working.
 
-Cadence handles that whole loop:
+OpenSpeak handles that whole loop:
 
 ```text
 hotkey down → microphone starts → live waveform
@@ -46,11 +50,11 @@ hotkey up   → speech-to-text → optional cleanup → safety gates → Ctrl+V
 The overlay never takes focus. You can dictate into a browser, editor, Slack, Notepad, a code
 review, a terminal prompt or anything else that accepts text.
 
-![Cadence listening over another application](assets/readme/11-overlay-listening.png)
+![OpenSpeak listening over another application](assets/readme/11-overlay-listening.png)
 
 When the text lands, the pill confirms the word count and gets out of the way.
 
-![Cadence finished dictation state](assets/readme/12-overlay-done.png)
+![OpenSpeak finished dictation state](assets/readme/12-overlay-done.png)
 
 ---
 
@@ -108,7 +112,7 @@ npm.cmd --version
 ```
 
 Use `npm.cmd` in place of `npm` in the commands below. You do not need to change the machine-wide
-PowerShell execution policy just to run Cadence.
+PowerShell execution policy just to run OpenSpeak.
 
 ### 2. Get the code
 
@@ -116,7 +120,7 @@ If you use Git, clone the repository and enter the folder:
 
 ```powershell
 git clone <repository-url>
-cd cadence
+cd openspeak
 ```
 
 If you do not use Git:
@@ -134,11 +138,11 @@ The command prompt should be inside the folder that contains `package.json`.
 npm install
 ```
 
-`uiohook-napi` is optional. npm will try to install it because it gives Cadence true key-down and
-key-up detection. If that native package cannot install on your machine, the rest of Cadence still
+`uiohook-napi` is optional. npm will try to install it because it gives OpenSpeak true key-down and
+key-up detection. If that native package cannot install on your machine, the rest of OpenSpeak still
 works; use toggle mode or the fallback hold mode.
 
-### 4. Start Cadence
+### 4. Start OpenSpeak
 
 ```powershell
 npm start
@@ -157,13 +161,13 @@ JavaScript in `src/` directly.
 
 ## First launch
 
-Cadence starts with a short setup instead of dropping you into a wall of settings.
+OpenSpeak starts with a short setup instead of dropping you into a wall of settings.
 
-![Welcome to Cadence onboarding screen](assets/readme/02-onboarding.png)
+![Welcome to OpenSpeak onboarding screen](assets/readme/02-onboarding.png)
 
 ### Step 1: connect a model
 
-Cadence is bring-your-own-key software. Pick the provider, paste a key, then use **Save & test**.
+OpenSpeak is bring-your-own-key software. Pick the provider, paste a key, then use **Save & test**.
 The test happens before you leave setup, so a typo does not wait until your first dictation to
 become a mystery.
 
@@ -192,8 +196,8 @@ an OpenAI-compatible endpoint.
 Pick the input you actually speak into and watch the level meter. Windows may hide device names
 until microphone permission has been granted.
 
-Cadence stores both the device ID and the human-readable label. Windows often gives a reconnected
-USB microphone a new ID; the label lets Cadence find the same headset again instead of silently
+OpenSpeak stores both the device ID and the human-readable label. Windows often gives a reconnected
+USB microphone a new ID; the label lets OpenSpeak find the same headset again instead of silently
 falling back to something else.
 
 ### Step 3: learn the hotkey
@@ -201,7 +205,7 @@ falling back to something else.
 The ideal default is **Right Ctrl**: hold it, speak, release it. That requires the optional
 low-level keyboard hook.
 
-If the hook is unavailable, Cadence uses **Ctrl + Shift + Space** and tells you exactly which
+If the hook is unavailable, OpenSpeak uses **Ctrl + Shift + Space** and tells you exactly which
 fallback is active. You can switch to toggle mode at any time.
 
 ---
@@ -209,10 +213,10 @@ fallback is active. You can switch to toggle mode at any time.
 ## Use it
 
 1. Click where the text should go.
-2. Hold the Cadence hotkey.
+2. Hold the OpenSpeak hotkey.
 3. Speak normally. False starts are fine.
 4. Release the key.
-5. Keep working. Cadence transcribes, cleans, checks and inserts the result.
+5. Keep working. OpenSpeak transcribes, cleans, checks and inserts the result.
 
 For example, you can say:
 
@@ -242,7 +246,7 @@ in the final text.
 
 ### Cancel a dictation
 
-Press **Escape** while Cadence is listening or processing. The current recording is discarded and
+Press **Escape** while OpenSpeak is listening or processing. The current recording is discarded and
 nothing is inserted.
 
 ### If an app refuses the paste
@@ -303,11 +307,11 @@ npm run test:format
 
 ## History
 
-Cadence keeps the most recent 500 dictations by default. History stores the polished result and the
+OpenSpeak keeps the most recent 500 dictations by default. History stores the polished result and the
 raw transcript side by side, which makes failures visible and gives you a way back to your exact
 words.
 
-![Searchable Cadence dictation history](assets/readme/04-history.png)
+![Searchable OpenSpeak dictation history](assets/readme/04-history.png)
 
 From each history entry you can:
 
@@ -327,7 +331,7 @@ Search looks through both the raw and cleaned text.
 Use the dictionary for names, project vocabulary, acronyms and the terms speech models repeatedly
 mishear.
 
-![Cadence custom dictionary](assets/readme/05-dictionary.png)
+![OpenSpeak custom dictionary](assets/readme/05-dictionary.png)
 
 There are two kinds of entry:
 
@@ -352,7 +356,7 @@ on the model making the same decision every time.
 Stats are local and intentionally simple: words dictated, dictation count, average and best WPM,
 day streak, estimated time saved against typing at 40 WPM, and a 30-day activity strip.
 
-![Cadence local usage statistics](assets/readme/06-stats.png)
+![OpenSpeak local usage statistics](assets/readme/06-stats.png)
 
 There is no account, leaderboard, analytics service or telemetry behind this screen. It is a local
 JSON file.
@@ -366,7 +370,7 @@ JSON file.
 Keys can be saved, replaced, tested or removed independently. The UI only receives a masked hint;
 the full key never crosses into the renderer.
 
-![Cadence API key and transcription settings](assets/readme/07-settings-providers.png)
+![OpenSpeak API key and transcription settings](assets/readme/07-settings-providers.png)
 
 Transcription and cleanup can use different providers. A useful setup is:
 
@@ -374,7 +378,7 @@ Transcription and cleanup can use different providers. A useful setup is:
 OpenAI gpt-4o-transcribe → Claude Haiku cleanup
 ```
 
-If cleanup fails or its key is missing, Cadence keeps going with the raw transcript. Cleanup is a
+If cleanup fails or its key is missing, OpenSpeak keeps going with the raw transcript. Cleanup is a
 nicety; losing the words you just spoke is not.
 
 ### OpenAI-compatible endpoints
@@ -382,29 +386,29 @@ nicety; losing the words you just spoke is not.
 The provider layer reads `openaiBaseUrl` from the local settings file. To use an
 OpenAI-compatible gateway or local server:
 
-1. Quit Cadence from the tray.
-2. Open `%APPDATA%\Cadence\settings.json`.
+1. Quit OpenSpeak from the tray.
+2. Open `%APPDATA%\OpenSpeak\settings.json`.
 3. Change `openaiBaseUrl`.
-4. Start Cadence and enter that endpoint’s key in the OpenAI key row.
+4. Start OpenSpeak and enter that endpoint’s key in the OpenAI key row.
 5. Type the endpoint’s model ID into the model field.
 
 This is an advanced configuration; there is not a base-URL field in the current Settings screen.
 
-![Cadence transcription, cleanup and hotkey settings](assets/readme/08-settings-models-hotkey.png)
+![OpenSpeak transcription, cleanup and hotkey settings](assets/readme/08-settings-models-hotkey.png)
 
 ### Hotkey and insertion
 
-Cadence reports the hotkey tier that is actually active. It does not pretend a fallback is the
+OpenSpeak reports the hotkey tier that is actually active. It does not pretend a fallback is the
 same as a real key-up hook.
 
-![Cadence hotkey and insertion settings](assets/readme/09-settings-hotkey-microphone.png)
+![OpenSpeak hotkey and insertion settings](assets/readme/09-settings-hotkey-microphone.png)
 
 ### Microphone and system behaviour
 
 The microphone panel shows the selected input, the input that is really open, a live meter and the
 minimum recording length. Very short taps are ignored instead of being uploaded as empty audio.
 
-![Cadence microphone and appearance settings](assets/readme/10-settings-microphone-system.png)
+![OpenSpeak microphone and appearance settings](assets/readme/10-settings-microphone-system.png)
 
 You can also choose the pill position, sounds, launch-at-login behaviour, start-minimised behaviour
 and whether a dim idle dot remains on screen.
@@ -414,7 +418,7 @@ and whether a dim idle dot remains on screen.
 ## Hotkeys on Windows, honestly
 
 Electron’s `globalShortcut` API gives a key-down event, not a key-up event, and it cannot register a
-bare modifier such as Right Ctrl. Cadence has three operating tiers:
+bare modifier such as Right Ctrl. OpenSpeak has three operating tiers:
 
 | Tier | Behaviour | Tradeoff |
 |---|---|---|
@@ -447,7 +451,7 @@ overlay is a separate, non-focusable window. The settings/history UI is a third 
 one job.
 
 Captured audio is encoded as 16 kHz mono WAV in memory. It is uploaded once when you release the
-hotkey. Cadence does not write recordings to its data folder.
+hotkey. OpenSpeak does not write recordings to its data folder.
 
 ### Why WAV instead of MediaRecorder output
 
@@ -458,7 +462,7 @@ adding an audio dependency.
 ### Cleanup safety gates
 
 An LLM asked to edit text will occasionally answer it, wrap it in commentary, expand it wildly or
-return almost nothing. Cadence rejects the cleanup result and uses the raw transcript when:
+return almost nothing. OpenSpeak rejects the cleanup result and uses the raw transcript when:
 
 - the output is empty;
 - it grows beyond 2.4× the raw word count;
@@ -472,7 +476,7 @@ The history entry is tagged `raw` and records the reason. Failure is visible ins
 
 ## Privacy and security
 
-Cadence has no backend of its own and no telemetry.
+OpenSpeak has no backend of its own and no telemetry.
 
 What leaves the machine:
 
@@ -488,7 +492,7 @@ What stays local:
 - encrypted API key blobs.
 
 API keys are encrypted with Electron `safeStorage`, which uses Windows DPAPI and is scoped to your
-Windows user. If OS encryption is unavailable, Cadence refuses to save a key instead of quietly
+Windows user. If OS encryption is unavailable, OpenSpeak refuses to save a key instead of quietly
 writing it as plaintext.
 
 Every renderer uses:
@@ -503,10 +507,10 @@ it receives a hint such as `sk-…4f2a`.
 
 ### Local data folder
 
-Cadence stores its local files in:
+OpenSpeak stores its local files in:
 
 ```text
-%APPDATA%\Cadence\
+%APPDATA%\OpenSpeak\
 ```
 
 | File | Contains |
@@ -523,7 +527,7 @@ Use **Settings → Open data folder** to jump there.
 
 ## Tray behaviour
 
-Cadence is designed to disappear into the tray once it is configured. The tray menu gives direct
+OpenSpeak is designed to disappear into the tray once it is configured. The tray menu gives direct
 access to:
 
 - Dictate;
@@ -654,7 +658,7 @@ npm run test:format
 
 ## Troubleshooting
 
-### Cadence opens, but dictation cannot start
+### OpenSpeak opens, but dictation cannot start
 
 Open **Settings → API keys** and test the key used by the transcription provider. Transcription
 needs an OpenAI or Gemini key. An Anthropic key alone cannot turn audio into text.
@@ -676,18 +680,18 @@ You are probably on the hold fallback, which uses keyboard auto-repeat and a wat
 Electron does not provide key-up. Install the optional hook successfully or use toggle mode for
 exact start and stop events.
 
-### Cadence listens to the wrong microphone
+### OpenSpeak listens to the wrong microphone
 
 Open **Settings → Microphone**, choose the input, speak, and watch the live meter. The line
 “Currently listening through…” reports the device that was really opened, not merely the saved
 choice.
 
-If a USB microphone was reconnected, press **Refresh**. Cadence will try to resolve the saved
+If a USB microphone was reconnected, press **Refresh**. OpenSpeak will try to resolve the saved
 device by label.
 
 ### Microphone names are blank
 
-Allow desktop apps to access the microphone in Windows privacy settings, then return to Cadence and
+Allow desktop apps to access the microphone in Windows privacy settings, then return to OpenSpeak and
 press **Refresh**. Chromium cannot reveal labels before permission is granted.
 
 ### Text reaches the clipboard but not the app
@@ -711,7 +715,7 @@ as accidental taps and are not uploaded. Change the threshold in **Settings → 
 
 ### `npm install` reports an error for `uiohook-napi`
 
-The module is optional. If npm completed the rest of the install, run Cadence and use toggle mode.
+The module is optional. If npm completed the rest of the install, run OpenSpeak and use toggle mode.
 You can retry optional packages later with:
 
 ```powershell
@@ -751,7 +755,7 @@ These are actual v1 boundaries, not items hidden behind “coming soon”.
 
 ## FAQ
 
-### Does Cadence save audio recordings?
+### Does OpenSpeak save audio recordings?
 
 No. The recording is held in memory long enough to send to the selected transcription provider.
 History stores text and metadata, not audio.
@@ -809,5 +813,5 @@ solves cleanly. The small dependency surface is part of the product.
 
 This repository does not currently include a software license.
 
-Cadence is an independent, from-scratch implementation of the push-to-talk dictation workflow. It
+OpenSpeak is an independent, from-scratch implementation of the push-to-talk dictation workflow. It
 is not affiliated with, endorsed by or derived from another product.

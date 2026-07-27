@@ -1,10 +1,10 @@
 {
-  "name": "cadence",
-  "productName": "Cadence",
+  "name": "openspeak",
+  "productName": "OpenSpeak",
   "version": "0.1.0",
   "description": "Push-to-talk voice dictation for Windows. Hold a key, speak, and polished text lands at your cursor.",
   "main": "src/main/main.js",
-  "author": "Cadence",
+  "author": "OpenSpeak",
   "license": "UNLICENSED",
   "private": true,
   "scripts": {
@@ -22,13 +22,15 @@
     "electron-builder": "^25.1.8"
   },
   "build": {
-    "appId": "app.cadence.dictation",
-    "productName": "Cadence",
+    "appId": "app.openspeak.dictation",
+    "productName": "OpenSpeak",
+    "npmRebuild": false,
     "files": [
       "src/**/*",
       "package.json"
     ],
     "win": {
+      "icon": "assets/icon.ico",
       "target": [
         "nsis"
       ]

@@ -10,7 +10,7 @@ const on = (ch, fn) => {
   return () => ipcRenderer.removeListener(ch, wrapped);
 };
 
-contextBridge.exposeInMainWorld('cadence', {
+contextBridge.exposeInMainWorld('openspeak', {
   bootstrap: () => invoke(CH.HUB_BOOTSTRAP),
 
   settings: {

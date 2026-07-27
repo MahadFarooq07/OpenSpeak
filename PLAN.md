@@ -1,4 +1,4 @@
-# Cadence — Build Plan
+# OpenSpeak — Build Plan
 
 A Windows-first Electron dictation app. Hold a key, speak, release — polished text lands at
 your cursor in whatever app you're in. Independent, from-scratch implementation of the
@@ -171,7 +171,7 @@ Every rejection is recorded in history so the failure mode is visible rather tha
 ## 3. Module map
 
 ```
-cadence/
+openspeak/
 ├─ package.json
 ├─ README.md · PLAN.md · .gitignore
 ├─ src/

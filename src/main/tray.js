@@ -17,7 +17,7 @@ function createTray(handlers) {
   // Rendered large and downsampled: nativeImage's filtering beats trying to
   // draw sub-pixel bars directly at 16px.
   tray = new Tray(appIcon(64, { plate: false, simple: true }).resize({ width: 16, height: 16 }));
-  tray.setToolTip('Cadence');
+  tray.setToolTip('OpenSpeak');
   tray.on('click', () => handlers.onOpen());
   tray.on('double-click', () => handlers.onOpen());
   refreshTray(handlers);
@@ -60,7 +60,7 @@ function refreshTray(handlers) {
   const s = h.getSettings();
 
   const menu = Menu.buildFromTemplate([
-    { label: 'Open Cadence', click: () => h.onOpen() },
+    { label: 'Open OpenSpeak', click: () => h.onOpen() },
     { label: 'Start dictation', click: () => h.onDictate() },
     { type: 'separator' },
     {
@@ -84,7 +84,7 @@ function refreshTray(handlers) {
     { label: 'Settings…', click: () => h.onSettings() },
     { label: 'API keys…', click: () => h.onKeys() },
     { type: 'separator' },
-    { label: `Cadence ${app.getVersion()}`, enabled: false },
+    { label: `OpenSpeak ${app.getVersion()}`, enabled: false },
     { label: 'Quit', click: () => h.onQuit() }
   ]);
   tray.setContextMenu(menu);

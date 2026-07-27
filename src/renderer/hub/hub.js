@@ -1,6 +1,6 @@
 'use strict';
 
-const api = window.cadence;
+const api = window.openspeak;
 
 const state = {
   settings: {},
@@ -301,7 +301,7 @@ function paintDictionary() {
   const box = $('#dictList');
   box.textContent = '';
   if (!state.dictionary.length) {
-    box.appendChild(el('div', 'empty', 'No terms yet. Add the names Cadence keeps getting wrong.'));
+    box.appendChild(el('div', 'empty', 'No terms yet. Add the names OpenSpeak keeps getting wrong.'));
     return;
   }
   for (const t of state.dictionary) {
@@ -646,7 +646,7 @@ function onMicLevel(level) {
   const captions = [$('#meterCaption'), $('#obMeterCaption')];
   captions.forEach((c) => {
     c.className = 'meter-caption live';
-    c.textContent = 'Hearing you — this is the mic Cadence will use.';
+    c.textContent = 'Hearing you — this is the mic OpenSpeak will use.';
   });
   clearTimeout(silenceTimer);
   silenceTimer = setTimeout(() => {

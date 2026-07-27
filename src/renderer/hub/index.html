@@ -7,23 +7,24 @@
       content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:"
     />
     <link rel="stylesheet" href="hub.css" />
-    <title>Cadence</title>
+    <title>OpenSpeak</title>
   </head>
   <body>
     <header class="titlebar">
       <div class="brand">
         <svg class="mark" viewBox="0 0 88 88" aria-hidden="true" focusable="false">
           <g stroke="currentColor" stroke-width="7" stroke-linecap="round">
-            <line x1="57" y1="22" x2="57" y2="30" />
-            <line x1="43" y1="21" x2="43" y2="35" />
-            <line x1="31" y1="27" x2="31" y2="45" />
-            <line x1="24" y1="33" x2="24" y2="55" />
-            <line x1="31" y1="43" x2="31" y2="61" />
-            <line x1="43" y1="53" x2="43" y2="67" />
-            <line x1="57" y1="58" x2="57" y2="66" />
+            <line x1="65" y1="39" x2="65" y2="49" />
+            <line x1="59" y1="25" x2="59" y2="33" />
+            <line x1="44" y1="20" x2="44" y2="28" />
+            <line x1="29" y1="25" x2="29" y2="33" />
+            <line x1="23" y1="39" x2="23" y2="49" />
+            <line x1="29" y1="55" x2="29" y2="63" />
+            <line x1="44" y1="60" x2="44" y2="68" />
+            <line x1="59" y1="55" x2="59" y2="63" />
           </g>
         </svg>
-        <span class="name">Cadence</span>
+        <span class="name">OpenSpeak</span>
       </div>
       <div class="titlebar-status" id="titleStatus"></div>
     </header>
@@ -57,7 +58,7 @@
           <div class="panel">
             <div class="panel-head">
               <h2>Formatting mode</h2>
-              <p>How Cadence shapes what you say before it lands.</p>
+              <p>How OpenSpeak shapes what you say before it lands.</p>
             </div>
             <div class="modes" id="modeGrid"></div>
           </div>
@@ -89,7 +90,7 @@
             <h1>Dictionary</h1>
           </div>
           <p class="lead">
-            Names, jargon and acronyms Cadence should get right. Leave “heard as” empty to simply
+            Names, jargon and acronyms OpenSpeak should get right. Leave “heard as” empty to simply
             teach it a spelling; fill it in to force a replacement.
           </p>
           <form class="dict-form" id="dictForm">
@@ -322,7 +323,7 @@
             </label>
             <label class="toggle">
               <input type="checkbox" id="setLaunch" data-setting="launchAtLogin" />
-              <span>Launch Cadence when I sign in to Windows</span>
+              <span>Launch OpenSpeak when I sign in to Windows</span>
             </label>
             <label class="toggle">
               <input type="checkbox" id="setStartMin" data-setting="startMinimized" />
@@ -342,9 +343,9 @@
         <div class="steps" id="obSteps"></div>
 
         <div class="ob-body" data-step="0">
-          <h2>Welcome to Cadence</h2>
+          <h2>Welcome to OpenSpeak</h2>
           <p>
-            Hold a key anywhere in Windows, say what you mean, and let go. Cadence transcribes it,
+            Hold a key anywhere in Windows, say what you mean, and let go. OpenSpeak transcribes it,
             cleans up the ums and false starts, and drops the finished text right where your cursor is.
           </p>
           <p class="muted">Three short steps and you're dictating.</p>
@@ -353,7 +354,7 @@
         <div class="ob-body" data-step="1" hidden>
           <h2>Connect a model</h2>
           <p>
-            Cadence uses your own API key. Nothing is stored on our side, and the key is encrypted
+            OpenSpeak uses your own API key. Nothing is stored on our side, and the key is encrypted
             with Windows DPAPI before it touches disk.
           </p>
           <div class="field">
@@ -377,7 +378,7 @@
 
         <div class="ob-body" data-step="2" hidden>
           <h2>Check your microphone</h2>
-          <p>Cadence needs one working input device. Pick the one you actually speak into.</p>
+          <p>OpenSpeak needs one working input device. Pick the one you actually speak into.</p>
           <div class="field">
             <label for="obDevice">Microphone</label>
             <select class="input" id="obDevice"></select>

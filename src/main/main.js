@@ -49,7 +49,7 @@ function boot() {
   });
 
   app.on('window-all-closed', () => {
-    // Cadence lives in the tray; closing the hub does not quit.
+    // OpenSpeak lives in the tray; closing the hub does not quit.
   });
 
   app.on('before-quit', () => {
@@ -61,7 +61,7 @@ function boot() {
   });
 
   app.whenReady().then(onReady).catch((err) => {
-    dialog.showErrorBox('Cadence failed to start', String(err && err.stack ? err.stack : err));
+    dialog.showErrorBox('OpenSpeak failed to start', String(err && err.stack ? err.stack : err));
     app.quit();
   });
 }
