@@ -1,26 +1,33 @@
 # OpenSpeak
 
-<p align="center">
-  <img src="assets/logo.svg" width="88" height="88" alt="OpenSpeak logo" />
-</p>
+[Install](#install-openspeak) · [How it works](#what-problem-this-solves) · [Issues](../../issues)
 
-<p align="center">
-  <strong>Hold a key and transcribe speech anywhere</strong><br />
-  OpenSpeak turns it into clean text and puts it wherever your cursor already is.
-</p>
+> **Beta** — OpenSpeak is usable today and actively being polished.
+> [Issues](../../issues) and feedback are welcome.
 
-<p align="center">
-  Windows · Electron · Bring your own API key
-</p>
+**Push-to-talk dictation that turns speech into ready-to-use text.** OpenSpeak is an open-source
+Windows app that lives in the tray. Hold a key in any app, speak, and release—the result is
+transcribed, cleaned up, formatted, and placed wherever your cursor already is.
 
-![A microphone waveform resolving into clean lines of text](assets/readme/hero-voice-to-text.png)
+It runs on your machine and does not lock you into one model: use your own OpenAI or Gemini key for
+transcription, then optionally use OpenAI, Anthropic, or Gemini for cleanup. OpenSpeak has no backend
+and no telemetry; audio leaves your machine only for the providers you configure.
 
-OpenSpeak is push-to-talk voice dictation for Windows. It is not another chat window and it is not
-a meeting recorder. You hold a key in any app, speak, release, and the finished text lands at your
-cursor. The rough transcript can be cleaned up, corrected, formatted and shaped for the thing you
-are writing before it is pasted.
+![How OpenSpeak turns speech into polished text at your cursor](assets/readme/openspeak-workflow.png)
 
-> As building software gets accessible to everyone, more of it will be open-sourced; what people pay for shifts to trust, hosting, support, distribution, and not having to babysit it.
+## Install OpenSpeak
+
+> There is no signed public installer yet. OpenSpeak is ready to run from source on Windows 10 or 11.
+
+You need a microphone, a current Node.js LTS release, and one OpenAI or Gemini API key.
+
+```powershell
+npm install
+npm start
+```
+
+The first launch walks you through the model key, microphone, and push-to-talk hotkey. See the
+[full source setup](#run-from-source) for step-by-step instructions and troubleshooting.
 
 ![OpenSpeak Dictate screen with formatting modes and recent dictations](assets/readme/01-dictate-home.png)
 
@@ -58,28 +65,7 @@ When the text lands, the pill confirms the word count and gets out of the way.
 
 ---
 
-## The 60-second version
-
-You need:
-
-1. **Windows 10 or 11.**
-2. **Node.js and npm** if you are running from source.
-3. **A microphone.**
-4. **One OpenAI or Gemini API key** for transcription.
-5. Optionally, an Anthropic key if you want Claude to do the cleanup step.
-
-Then:
-
-```powershell
-npm install
-npm start
-```
-
-The first launch walks through the rest.
-
----
-
-## Install it
+## Run from source
 
 ### The honest state of the project
 
