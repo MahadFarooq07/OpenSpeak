@@ -13,7 +13,7 @@ It runs on your machine and does not lock you into one model: use your own OpenA
 transcription, then optionally use OpenAI, Anthropic, or Gemini for cleanup. OpenSpeak has no backend
 and no telemetry; audio leaves your machine only for the providers you configure.
 
-![How OpenSpeak turns speech into polished text at your cursor](assets/readme/openspeak-workflow.png)
+![OpenSpeak turns messy speech into polished text at your cursor](assets/readme/openspeak-demo.gif)
 
 ## Install OpenSpeak
 
